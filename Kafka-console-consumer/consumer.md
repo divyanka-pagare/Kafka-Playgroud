@@ -1,3 +1,4 @@
+```
 PS C:\Users\dell> cd C:\kafka
 PS C:\kafka>
 PS C:\kafka> bin\windows\kafka-console-consumer.bat `
@@ -14,3 +15,5 @@ Order-2
 Order-3
 Order-4
 Order-5
+
+```
