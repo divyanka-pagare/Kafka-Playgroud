@@ -1,9 +1,4 @@
-
-Windows PowerShell
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
-
+```
 PS C:\Users\dell> cd C:\kafka
 PS C:\kafka>
 PS C:\kafka> bin\windows\kafka-console-producer.bat `
@@ -16,3 +11,4 @@ PS C:\kafka> bin\windows\kafka-console-producer.bat `
 >Order-4
 >Order-5
 >
+```

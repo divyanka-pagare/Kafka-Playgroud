@@ -1,3 +1,5 @@
+```
+
 PS C:\kafka> bin\windows\kafka-topics.bat `
 >> --create `
 >> --topic orders `
@@ -19,3 +21,5 @@ Topic: orders   TopicId: 8v9E815sQsO_kdkxkJTkIg PartitionCount: 3       Replicat
         Topic: orders   Partition: 1    Leader: 2       Replicas: 2     Isr: 2  Elr:    LastKnownElr:
         Topic: orders   Partition: 2    Leader: 2       Replicas: 2     Isr: 2  Elr:    LastKnownElr:
 PS C:\kafka>
+
+```
