@@ -1,3 +1,4 @@
+```
 PS C:\Users\dell> cd c:\kafka
 PS C:\kafka> bin\windows\kafka-server-start.bat config\broker.properties
 DEPRECATED: A Log4j 1.x configuration file has been detected, which is no longer recommended.
@@ -1328,3 +1329,5 @@ org.apache.kafka.common.network.InvalidReceiveException: Invalid receive (size =
         at kafka.network.Processor.poll(SocketServer.scala:993)
         at kafka.network.Processor.run(SocketServer.scala:897)
         at java.base/java.lang.Thread.run(Thread.java:1474)
+
+```

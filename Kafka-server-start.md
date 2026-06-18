@@ -1,3 +1,4 @@
+```
 PS C:\Users\dell> cd C:\Kafka
 PS C:\Kafka> bin\windows\kafka-server-start.bat config\controller.properties
 DEPRECATED: A Log4j 1.x configuration file has been detected, which is no longer recommended.
@@ -157,3 +158,4 @@ Bootstrap metadata: BootstrapMetadata(records=[ApiMessageAndVersion(FeatureLevel
 Formatting metadata directory /tmp/kraft-controller-logs with metadata.version 4.3-IV0.
 PS C:\Kafka>
 
+```
