@@ -1,4 +1,6 @@
-If a topic has 3 partitions and a consumer group has 5 consumers, how many consumers will actually receive messages, and what will happen to the remaining consumers? 🤔
+If a topic has 3 partitions and a consumer group has 5 consumers, 
+how many consumers will actually receive messages, 
+and what will happen to the remaining consumers? 🤔
 
 --> Scenario
 
