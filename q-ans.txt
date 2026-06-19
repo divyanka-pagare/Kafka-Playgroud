@@ -19,3 +19,41 @@ order-4 -> Partition 0
 order-5 -> Partition 1
 
 This helps balance load.
+
+----------------------------------------------------------------------
+
+Case 2: Key Provided
+
+Producer:
+
+producer.send(
+    new ProducerRecord<>("orders", "customer-101", "order-1")
+);
+
+Key = customer-101
+
+Kafka calculates:
+
+hash(customer-101) % partitionCount
+
+Suppose:
+
+hash(customer-101) % 3 = 1
+
+Then:
+
+Partition 1
+
+Every message with the same key goes to the same partition.
+
+customer-101 order-1
+customer-101 order-2
+customer-101 order-3
+
+↓
+
+Partition 1
+
+Always.
+
+
