@@ -183,3 +183,120 @@ this is one of the biggest reasons companies use Kafka: horizontal scalability w
 
 ----------------------------------------------------------------------------------------------------------------------------
 
+Interview Question (very common)
+
+Suppose:
+
+Topic = 3 partitions
+Consumer Group A = 3 consumers
+
+Consumer Group B = 2 consumers
+
+Will both groups receive the messages, or will they compete with each other?
+
+Think about it carefully. This question tests whether you understand the difference between consumer groups and consumers inside a group. 🚀
+
+--> 
+both groups will receive the messages 
+
+🎯 Correct!
+
+This is one of the most important Kafka concepts.
+
+Topic
+orders
+├── Partition 0
+├── Partition 1
+└── Partition 2
+Consumer Group A
+Consumer A1
+Consumer A2
+Consumer A3
+
+Gets:
+
+Partition 0
+Partition 1
+Partition 2
+Consumer Group B
+Consumer B1
+Consumer B2
+
+Also gets:
+
+Partition 0
+Partition 1
+Partition 2
+Result
+
+When a producer sends:
+
+Order Created
+Order Paid
+Order Shipped
+
+Both groups receive all messages:
+
+Producer
+   |
+   v
+ orders
+   |
+   +------> Consumer Group A
+   |
+   +------> Consumer Group B
+
+
+Real World Example
+
+Imagine:
+
+Order Placed
+
+event is published.
+
+Consumer Group: Inventory Service
+
+Consumes event and:
+
+Reduce Stock
+Consumer Group: Notification Service
+
+Consumes same event and:
+
+Send Email
+Send SMS
+Consumer Group: Analytics Service
+
+Consumes same event and:
+
+Update Dashboard
+
+All three groups get the same message independently.
+
+Key Rule
+Inside the SAME Consumer Group
+Group A
+├── Consumer 1
+├── Consumer 2
+└── Consumer 3
+
+Messages are shared.
+
+Each partition belongs to only one consumer.
+
+Across DIFFERENT Consumer Groups
+Group A
+Group B
+Group C
+
+Messages are copied logically to each group.
+
+Every group gets all messages.
+
+Interview Answer
+
+Consumers within the same consumer group share the workload and 
+each partition is assigned to only one consumer in that group. 
+However, different consumer groups consume independently, 
+so all consumer groups receive the same messages from the topic.
