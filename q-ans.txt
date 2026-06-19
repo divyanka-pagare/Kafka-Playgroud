@@ -1,0 +1,21 @@
+How does Kafka decide where to store them?
+--> 
+Case 1: No Key Provided
+
+Producer:
+
+producer.send(new ProducerRecord<>("orders", "order-1"));
+
+No key.
+
+Kafka distributes messages across partitions.
+
+Example:
+
+order-1 -> Partition 0
+order-2 -> Partition 1
+order-3 -> Partition 2
+order-4 -> Partition 0
+order-5 -> Partition 1
+
+This helps balance load.
