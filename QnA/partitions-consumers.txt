@@ -154,3 +154,32 @@ Exactly as you described.
 
 ---------------------------------------------------------------------------
 
+Imagine an order processing system:
+
+order Topic 
+10 Partitions
+
+During normal traffic:
+
+Consumer Group
+├── Order Service 1
+├── Order Service 2
+└── Order Service 3
+
+each service processes a few partitions.
+
+now during a sale event, we add 2 more instances:
+
+Consumer Group
+├── Order Service 1
+├── Order Service 2
+├── Order Service 3
+├── Order Service 4
+└── Order Service 5
+
+kafka automatically performs a rebalance and redistributes partitions.
+
+this is one of the biggest reasons companies use Kafka: horizontal scalability without changing application code.
+
+----------------------------------------------------------------------------------------------------------------------------
+
