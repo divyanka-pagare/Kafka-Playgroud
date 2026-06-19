@@ -1,0 +1,164 @@
+How does Kafka decide where to store them?
+--> 
+Case 1: No Key Provided
+
+Producer:
+
+producer.send(new ProducerRecord<>("orders", "order-1"));
+
+No key.
+
+Kafka distributes messages across partitions.
+
+Example:
+
+order-1 -> Partition 0
+order-2 -> Partition 1
+order-3 -> Partition 2
+order-4 -> Partition 0
+order-5 -> Partition 1
+
+This helps balance load.
+
+----------------------------------------------------------------------
+
+Case 2: Key Provided
+
+Producer:
+
+producer.send(
+    new ProducerRecord<>("orders", "customer-101", "order-1")
+);
+
+Key = customer-101
+
+Kafka calculates:
+
+hash(customer-101) % partitionCount
+
+Suppose:
+
+hash(customer-101) % 3 = 1
+
+Then:
+
+Partition 1
+
+Every message with the same key goes to the same partition.
+
+customer-101 order-1
+customer-101 order-2
+customer-101 order-3
+
+↓
+
+Partition 1
+
+Always.
+
+-----------------------------------------------------------------------------
+
+Why Is This Important?
+
+Imagine an e-commerce system.
+
+Customer places:
+
+Order Created
+Order Paid
+Order Shipped
+Order Delivered
+
+We want these events processed in order.
+
+If they go to different partitions:
+
+P0 -> Order Created
+P1 -> Order Paid
+P2 -> Order Delivered
+
+Ordering can break.
+
+Instead:
+
+Key = CustomerId
+customer-101
+
+All events go to the same partition.
+
+Kafka guarantees order within a partition.
+
+-----------------------------------------------------------------------------
+
+Q: Does Kafka guarantee ordering? (asked very frequently)
+--> 
+Kafka guarantees ordering only within a single partition. It does not guarantee global ordering across multiple partitions.
+
+--------------------------------------------------------------------------------
+
+Can you answer this?
+
+If we have:
+
+orders Topic
+├── Partition 0
+├── Partition 1
+└── Partition 2
+
+and the producer sends:
+
+Key = customer-101
+
+for 100 messages,
+
+Will those 100 messages go to the same partition or different partitions? And why?
+
+Try answering first like you're in an interview.
+
+----> Yes, Kafka uses the partitioning strategy and 
+the formula is --> 
+hash(key) % PartitionCount   , where key = CustomerID ( Ex. Customer-101)
+
+for the same key that is customer-101, the hash value remains the same.
+ans since the partition count is fixed at 3, the calculation always gives the same partition number. therefore, all 100 msgs with the same key customer-101 will be routed to the same partition, preserving message ordering.
+
+Example
+
+Suppose -->
+
+customer-101
+hash(customer-101) = 14567
+14567 % 3 = 2
+
+Then:
+
+Partition 2
+
+All these messages -->
+
+Order Created
+Order Paid
+Order Packed
+Order Shipped
+Order Delivered
+
+will go to -.
+
+Partition 2
+
+and Kafka guarantees they are consumed in that exact order.
+
+-------------------
+
+follow-up interview q
+what happens if the partition count changes?
+ex.
+initially ->
+3 partitions
+14567 % 3 = 2
+
+later 6 partitions
+14567 % 6 = 5
+
+now the same key may go to a different partition.
+that's why increasing partitions in a production topic must be done carefully when key-based ordering matters.
