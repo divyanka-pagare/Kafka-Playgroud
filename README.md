@@ -1,10 +1,9 @@
 ## Kafka Playground
-- kafka start
-- Kafka store
-- controller
-- broker
-- consumer
-- partitions
-- consumer groups
-- offsets
+
+- Started Controller
+- Started Broker
+- Created Topic (Orders)
+- Produced Messages
+- Consumed Messages
+- Learned Partitions
 
