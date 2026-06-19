@@ -1,0 +1,68 @@
+If a topic has 3 partitions and a consumer group has 5 consumers, how many consumers will actually receive messages, and what will happen to the remaining consumers? 🤔
+
+--> Scenario
+
+Topic:
+
+orders
+├── Partition 0
+├── Partition 1
+└── Partition 2
+
+Consumer Group:
+
+Group A
+├── Consumer 1
+├── Consumer 2
+├── Consumer 3
+├── Consumer 4
+└── Consumer 5
+What Kafka does
+
+Kafka follows this rule:
+
+One partition can be assigned to only one consumer within a consumer group.
+
+So:
+
+Consumer 1 → Partition 0
+Consumer 2 → Partition 1
+Consumer 3 → Partition 2
+Consumer 4 → No Partition
+Consumer 5 → No Partition
+Will Consumer 4 and 5 "wait"?
+
+Yes, they stay idle because there are no partitions available.
+
+However, the more precise answer is:
+
+They remain part of the consumer group but are not assigned any partitions.
+
+What happens if Consumer 2 crashes?
+
+Kafka triggers Rebalancing.
+
+Before:
+
+Consumer 1 → Partition 0
+Consumer 2 → Partition 1
+Consumer 3 → Partition 2
+Consumer 4 → Idle
+Consumer 5 → Idle
+
+After Consumer 2 dies:
+
+Consumer 1 → Partition 0
+Consumer 4 → Partition 1
+Consumer 3 → Partition 2
+Consumer 5 → Idle
+
+Kafka automatically reassigns the unowned partition.
+
+Interview Answer
+
+If a topic has 3 partitions and a consumer group has 5 consumers, 
+only 3 consumers will actively consume messages because each partition 
+can be assigned to only one consumer within the same consumer group. 
+The remaining 2 consumers stay idle. If one active consumer leaves the group, 
+Kafka performs a rebalance and assigns its partition to one of the idle consumers.
