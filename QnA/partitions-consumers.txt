@@ -66,3 +66,91 @@ only 3 consumers will actively consume messages because each partition
 can be assigned to only one consumer within the same consumer group. 
 The remaining 2 consumers stay idle. If one active consumer leaves the group, 
 Kafka performs a rebalance and assigns its partition to one of the idle consumers.
+
+---------------------------------------------------------------------------------------------
+
+Q. Suppose:
+
+Topic = 10 Partitions
+Consumer Group = 3 Consumers
+
+How many partitions will each consumer get?
+
+-->
+
+For:
+
+10 Partitions
+3 Consumers
+
+Kafka tries to distribute partitions as evenly as possible.
+
+Example assignment:
+
+Consumer 1
+├── Partition 0
+├── Partition 3
+├── Partition 6
+└── Partition 9
+
+Consumer 2
+├── Partition 1
+├── Partition 4
+└── Partition 7
+
+Consumer 3
+├── Partition 2
+├── Partition 5
+└── Partition 8
+
+So:
+
+Consumer 1 → 4 partitions
+Consumer 2 → 3 partitions
+Consumer 3 → 3 partitions
+
+Kafka won't always assign them in the exact round-robin pattern you wrote because it depends on the partition assignment strategy, but conceptually:
+
+Partitions are distributed as evenly as possible among consumers.
+
+---------------------------------------------------------------------------------------
+
+Number of consumers > Number of partitions
+3 Partitions
+5 Consumers
+
+Result:
+
+3 Active Consumers
+2 Idle Consumers
+
+
+------------------------
+
+
+Number of consumers = Number of partitions
+3 Partitions
+3 Consumers
+
+Result:
+
+Each consumer gets 1 partition
+
+This is usually the ideal scenario.
+
+--------------------------
+
+
+Number of consumers < Number of partitions
+10 Partitions
+3 Consumers
+
+Result:
+
+Each consumer gets multiple partitions
+
+Exactly as you described.
+
+
+---------------------------------------------------------------------------
+
