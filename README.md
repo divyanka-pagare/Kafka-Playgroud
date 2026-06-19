@@ -6,4 +6,6 @@
 - Produced Messages
 - Consumed Messages
 - Learned Partitions
+- Multiple Partitions
+- Consumer Groups
 
