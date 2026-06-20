@@ -26,3 +26,42 @@
 <img width="864" height="461" alt="image" src="https://github.com/user-attachments/assets/fca38565-b530-4dcb-9f35-b5bc0462be95" />
 
 
+
+
+
+
+
+### Payment Service
+
+Client
+  |
+  V
+Order Service
+  |
+  V
+Kafka Topic : orders
+  |
+  V
+Payment Service
+  |
+  V
+Kafka Topic : payments
+  |
+  V
+Notification Service
+
+
+### Create payments topic
+bin\windows\kafka-topics.bat --create --topic payments --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1
+
+--> Created topic payments.
+
+PS C:\kafka> bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+-->
+order-created
+orders
+payments
+
+### Inventory Service
+
+
