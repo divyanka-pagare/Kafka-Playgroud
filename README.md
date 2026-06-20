@@ -16,6 +16,30 @@
 ### Producer Service
 
 ### Notification Service 
+
+```
++------------------+
+|   User Service   |
++------------------+
+        |
+        | Publish UserRegisteredEvent
+        V
++------------------+
+|      Kafka       |
+| user-registered  |
++------------------+
+        |
+        | Consume Event
+        V
++----------------------+
+| Notification Service |
++----------------------+
+        |
+        V
+ Send Welcome Email
+
+```
+
 - Order send successfully - Message
 <img width="865" height="463" alt="Screenshot 2026-06-20 104218" src="https://github.com/user-attachments/assets/b8ee0916-58df-4b7b-908b-ec71ba20640b" />
 
