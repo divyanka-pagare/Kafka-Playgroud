@@ -62,6 +62,15 @@ order-created
 orders
 payments
 
+<img width="866" height="464" alt="image" src="https://github.com/user-attachments/assets/33b33827-c286-4185-8c56-e74e798cbf69" />
+
+<img width="868" height="466" alt="image" src="https://github.com/user-attachments/assets/f8472f9e-f37b-42dd-b4de-3bd4b98710b9" />
+
+
 ### Inventory Service
+
+<img width="868" height="465" alt="image" src="https://github.com/user-attachments/assets/5207165d-fcb2-45fd-a68f-060da2d5bf6d" />
+
+<img width="866" height="466" alt="image" src="https://github.com/user-attachments/assets/3dcf2b75-1800-48e1-be13-d40701b5d2dc" />
 
 
